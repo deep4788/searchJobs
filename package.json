@@ -1,0 +1,32 @@
+{
+    "name": "searchjobs",
+    "version": "1.0.0",
+    "description": "Command-line utility to search for jobs based on keywords and location written in Node.js",
+    "author": "Deep Aggarwal <deep.uiuc@gmail.com>",
+    "engines": {
+        "node": "4.6.0",
+        "npm": "2.15.9"
+    },
+    "main": "main.js",
+    "scripts": {
+        "start": "node main.js"
+    },
+    "dependencies": {
+        "request": "2.78.0",
+        "cheerio": "0.22.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/deep4788/searchJobs"
+    },
+    "keywords": [
+        "node.js",
+        "search",
+        "jobs",
+        "javascript",
+        "find",
+        "command-line",
+        "utility"
+    ],
+    "license": "MIT"
+}
