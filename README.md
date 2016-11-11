@@ -7,6 +7,12 @@ Description
 -----------
 TODO
 
+also write here that it saved the jobs details in a file called TODO
+
+also create .npmrc file and put 
+save=true
+save-exact=true
+
 Keywords are a comma-separated list of title, benefits, companies, expertise etc.
 
 Installation
