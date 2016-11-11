@@ -3,10 +3,6 @@ Search for Jobs
 
 A command-line utility to search for jobs based on keywords and location written in Node.js.
 
-#### Example of keywords and location:
-Keywords: software engineer, c++, javascript, ruby  
-Location: chicago, seattle
-
 Description
 -----------
 TODO
@@ -26,6 +22,10 @@ $ npm start
 Usage
 -----
 ```
+#### Example of keywords and location:
+Keywords: software engineer, c++, javascript, ruby  
+Location: chicago, seattle
+
 ```
 
 Screenshot
