@@ -5,6 +5,7 @@
 const fs = require("fs");
 const chalk = require("chalk");
 const cheerio = require("cheerio");
+const program = require("commander");
 const json2csv = require("json2csv");
 const request = require("request");
 const pkg = require("./package.json");
@@ -20,21 +21,21 @@ function createCSVData(inData) {
 
     fs.writeFile("jobsDetails.csv", csv, function(error) {
         if(error) throw error;
-        console.log("Job details are successfully saved in jobsDetails.csv file");
+        console.log(chalk.green("Job details are successfully saved in jobsDetails.csv file"));
     });
 }
 
 //This function searches for jobs on: https://jobs.github.com/positions
-function searchForJobs(pageNumber) {
+function searchForJobs(pageNumber, descrip, loc) {
     var url = "https://jobs.github.com/positions";
     var propertiesObject = {};
     var morePages = 0;  //0 signifies false and >0 means true
 
     //Loop through all the pages and find all the jobs matching the query string
-    propertiesObject = { description:"github", location:"", full_time:"", page:pageNumber};
+    propertiesObject = { description:descrip, location:loc, full_time:"", page:pageNumber};
     request({url:url, qs:propertiesObject}, function(error, response, body) {
         if(error) {
-            console.log(error);
+            console.log(chalk.red.bold(error));
             return;
         }
 
@@ -59,33 +60,32 @@ function searchForJobs(pageNumber) {
         morePages = positionList.children().find(".pagination .js-paginate").text().length;
         if(morePages) {
             pageNumber += 1;
-            searchForJobs(pageNumber);
+            searchForJobs(pageNumber, descrip, loc);
         }
         else if(morePages === 0) {
-            //We are done processing
+            //We are done processing so create the csv file
             createCSVData(allpositions);
         }
     });
 }
 
+//Main function where magic starts
 function main() {
     //Read the command line arguments
+    program
+        .version(pkg.version)
+        .description("An application to search for jobs based on keywords and location")
+        .option("-k, --keywords <keywords>", "list all comma-separated keywords: title, benefits, companies, expertise", "")
+        .option("-l, --location [location]", "filter by city, state, zip code or country", "")
+        .parse(process.argv);
+
+    //Check to make sure that options are passed
+    if(process.argv.length <= 2) {
+        program.help();
+    }
 
     //Start the job search
-    var pageNumber = 0;
-    searchForJobs(pageNumber);
+    searchForJobs(0, program.keywords, program.location);
 }
-
-//program
-//    .version(pkg.version)
-//    .command("list [directory]")
-//    .option("-a, --all", "List all")
-//    .option("-l, --long","Long list format")
-//    .action(list);
-//
-//program.parse(process.argv);
-
-// if program was called with no arguments, show help.
-// if (program.args.length === 0) program.help();
 
 main();
