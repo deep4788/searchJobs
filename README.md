@@ -8,7 +8,7 @@ Description
 
 This utility helps to search for jobs posted on GitHub's website: **https://jobs.github.com/positions**.
 
-It can be passed two comamnd-line arguments:
+It can be passed two command-line arguments:
 
 - **keywords**: list of comma-separated keywords: title, benefits, companies, expertise  
 - **location**: filter by city, state, zip code or country

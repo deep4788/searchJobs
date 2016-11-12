@@ -45,6 +45,7 @@ function searchForJobs(pageNumber, descrip, loc) {
         //Get the positionList section
         var positionList = $(".positionlist");
 
+        //Iterate over all the positions
         var positionDetails = {};
         positionList.children().each(function(i, element) {
             positionDetails.positionName = $(element).find(".title h4").text();
@@ -57,13 +58,15 @@ function searchForJobs(pageNumber, descrip, loc) {
             }
             positionDetails = {};
         });
+
+        //Try to see if there are more pages available to search for jobs
         morePages = positionList.children().find(".pagination .js-paginate").text().length;
         if(morePages) {
             pageNumber += 1;
             searchForJobs(pageNumber, descrip, loc);
         }
         else if(morePages === 0) {
-            //We are done processing so create the csv file
+            //We are done processing/searching for jobs so create the csv file
             createCSVData(allpositions);
         }
     });
