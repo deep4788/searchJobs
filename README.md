@@ -1,42 +1,47 @@
 Search for Jobs
 ===============
 
-A command-line utility to search for jobs based on keywords and location written in Node.js.
+`sj`: A command-line utility to search for jobs based on keywords and location written in Node.js.
 
 Description
 -----------
-TODO
 
-also write here that it saved the jobs details in a file called TODO
+This utility helps to search for jobs posted on GitHub's website: **https://jobs.github.com/positions**.
 
-also create .npmrc file and put 
-save=true
-save-exact=true
+It can be passed two comamnd-line arguments:
 
-Keywords are a comma-separated list of title, benefits, companies, expertise etc.
+- **keywords**: list of comma-separated keywords: title, benefits, companies, expertise  
+- **location**: filter by city, state, zip code or country
+
+Once the jobs are searched by `sj`, the details about the jobs will be saved in a file called "jobsDetails.csv" in the directory where `sj` is called from.
 
 Installation
 ------------
-```sh
-# Install the dependencies
-$ npm install
-
-# Run the app locally
-$ npm start
-```
+- Install Node.js and npm
+- Run `npm install -g searchJobs`
 
 Usage
 -----
-```
-#### Example of keywords and location:
-Keywords: software engineer, c++, javascript, ruby  
-Location: chicago, seattle
 
-```
+```sh
+  sj [options]
 
-Screenshot
-----------
-![](images/appImage.png)
+  An application to search for jobs based on keywords and location
+
+  Options:
+
+    -h, --help                 output usage information
+    -V, --version              output the version number
+    -k, --keywords <keywords>  list all comma-separated keywords: title, benefits, companies, expertise
+    -l, --location [location]  filter by city, state, zip code or country
+
+# Example usage:
+$ sj -k java -l chicago  #Search jobs for java and in Chicago
+$ sj -k "software engineer" -l  #Seach jobs for software engineer and any location
+$ sj -k "software engineer,senior" -l seattle  #Seach jobs for software engineer, for senior position and in Seattle
+$ sj -k -l  #Seach jobs with no passed-in keywords or location, default search
+$ sj -k ruby,manager,javascript -l atlanta  #Search jobs with ruby, manager and javascript as keywords and Atlanta as location
+```
 
 Author
 ------
